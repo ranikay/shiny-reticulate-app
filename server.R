@@ -13,7 +13,7 @@ shinyServer(function(input, output) {
     reticulate::virtualenv_install('python35_env', 
                                    packages = c('numpy'))  # <- Add other packages here, if needed
   }
-  reticulate::use_virtualenv('python35_env', required = TRUE)
+  reticulate::use_virtualenv('python35_env', required = T)
   reticulate::source_python('python_functions.py')
   
   # Generate the requested distribution
@@ -35,6 +35,7 @@ shinyServer(function(input, output) {
     
     return(hist(d(),
                 main = paste0('Distribution plot: ', dist, '(n = ', n, ')'),
+                xlab = '',
                 col = plot_cols))
   })
   
@@ -54,6 +55,8 @@ shinyServer(function(input, output) {
     s = Sys.info()
     df = data.frame(Info_Field = names(s),
                     Current_System_Setting = as.character(s))
+    return(datatable(df, rownames = F, selection = 'none',
+                     style = 'bootstrap', filter = 'none', options = list(dom = 't')))
   })
   
   # Display system path to python
