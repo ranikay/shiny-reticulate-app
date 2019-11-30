@@ -6,7 +6,7 @@ library(DT)
 ui <- fluidPage(
   
   # App title ----
-  titlePanel('Demo: Shiny + reticulate'),
+  titlePanel('Tutorial: Shiny + reticulate'),
   
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -42,7 +42,7 @@ ui <- fluidPage(
       # Input: Numbers that will be passed to a Python function ----
       numericInput('x',
                    'x value',
-                   value = 2),
+                   value = 1),
       numericInput('y',
                    'y value',
                    value = 2)
@@ -54,7 +54,7 @@ ui <- fluidPage(
       
       # Output: Tabset w/ plot, summary, and table ----
       tabsetPanel(type = 'tabs',
-                  tabPanel('Demo', 
+                  tabPanel('Using R and Python functions', 
                            br(),
                            h3('Outputs generated with pure R'),
                            br(),
