@@ -22,7 +22,9 @@ The demo app example contains two tabs. The first tab demonstrates some R and Py
 
 <br>
 
-<center><img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1swmp-cclfzk-351qtl/Two_tab_video.gif" width="800"></center>
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1swmp-cclfzk-351qtl/Two_tab_video.gif" width="800">
+</p>
 
 ---
 
@@ -134,7 +136,9 @@ That's it for set-up! Now we're ready to run the app locally.
 
 In RStudio, open the file server.R and click **Run App** to view your app.
 
-<center><img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1jwwt-3fnhuw-5qoay7/shiny-reticulate-app_screenshot_run_app.png" width="600"></center>
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1jwwt-3fnhuw-5qoay7/shiny-reticulate-app_screenshot_run_app.png" width="600">
+</p>
 
 <br>
 
@@ -152,11 +156,15 @@ Begin by running the app locally. In RStudio, open the file server.R and click *
 
 Click **Publish** in the upper right, confirm that the shinyapps.io account information is correct and name your app. Then click **Publish** in the pop-up window to send your app to the shinyapps.io cloud servers.
 
-<center><img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1sz52-ahuy0o-4mm0t0/Publish.png" width="600"></center>
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1sz52-ahuy0o-4mm0t0/Publish.png" width="600">
+</p>
 
 A successful deploy will produce a deployment log similar to this in the "Deploy" window in RStudio:
 
-<center><img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1szho-9873s-42i0kc/Deploy.png" width="600"></center>
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1szho-9873s-42i0kc/Deploy.png" width="600">
+</p>
 
 <br>
 
