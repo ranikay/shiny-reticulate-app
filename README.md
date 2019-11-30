@@ -217,3 +217,24 @@ NOTE: Python version was forced by use_python function
 **On shinyapps.io, I see warning: using reticulate but python was not specified; will use python at /usr/bin/python Did you forget to set the RETICULATE_PYTHON environment variable in your .Rprofile before publishing?**
 
 Confirm that the .Rprofile file is included in your project's directory. This file sets the `RETICULATE_PYTHON` environment variable, which tells `reticulate` where to locate the Python virtual environment on the shinyapps.io servers.
+
+--- 
+
+### Still having issues?
+
+For additional information about `reticulate`, check out these resources:
+
+* The `reticulate` [official documentation](https://rstudio.github.io/reticulate/)
+
+* The `reticulate` [repository on Github](https://github.com/rstudio/reticulate)
+
+If you're running into trouble using this demo app, feel free to open an issue and I'll do my best to help. I'll keep adding to the Troubleshooting section as I'm compiling other common issues.
+
+--- 
+
+### Acknowledgements
+
+Big thank you to the RStudio team who developed the `reticulate` package! It's a powerful tool and I've really enjoyed using it :)
+
+An especially warm thank you to [@jjallaire](https://github.com/jjallaire) and [@kevinushey](https://github.com/kevinushey) who contributed [some recent fixes](https://github.com/rstudio/reticulate/issues/399) to `reticulate` that made it possible to use Python 3 virtual environments on shinyapps.io.
+
