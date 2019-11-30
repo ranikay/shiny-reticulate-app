@@ -174,8 +174,46 @@ After deploying, visit the url shown in the deployment log in your browser to vi
 
 ### Troubleshooting
 
+If you are having issues deploying your app to shinyapps.io, double check that you have completed all steps in the [first-time set-up](#first-time-set-up). Confirm that the .Rprofile file is included in your project's directory. This file sets the `RETICULATE_PYTHON` environment variable, which tells `reticulate` where to locate the Python virtual environment on the shinyapps.io servers.
+
+If you visit the app url on shinyapps.io and see "Disconnected", log in to shinyapps.io and view the application logs for errors.
+
 Some common issues and how to solve them:
 
 **My app is deployed to shinyapps.io but shows that it's using Python 2.7**
 
-**TODO Another issue**
+Confirm that the .Rprofile file is included in your project's directory and double-check the name of the virtual environment that the `RETICULATE_PYTHON` variable is pointing at. For example, in my .Rprofile file, we see:
+
+```
+# .Rprofile
+
+Sys.setenv(RETICULATE_PYTHON = '/home/shiny/.virtualenvs/python35_env/bin/python')
+```
+
+The name of the virtual environment is `python35_env`. In server.R lines 11-12, we can see that the `python35` virtual environment was created using Python 3:
+
+```
+# server.R
+
+reticulate::virtualenv_create(envname = 'python35_env', 
+                                  python = '/usr/bin/python3')
+```
+
+To confirm that the virtual environment created is indeed using Python 3.5, we can also use the `py_config()` function in the `reticulate` package:
+
+```
+> reticulate::py_config()
+python:         /Users/rani/.virtualenvs/python35_env/bin/python
+libpython:      /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/config-3.5m/libpython3.5.dylib
+pythonhome:     /Library/Frameworks/Python.framework/Versions/3.5:/Library/Frameworks/Python.framework/Versions/3.5
+virtualenv:     /Users/rani/.virtualenvs/python35_env/bin/activate_this.py
+version:        3.5.0 (v3.5.0:374f501f4567, Sep 12 2015, 11:00:19)  [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]
+numpy:          /Users/rani/.virtualenvs/python35_env/lib/python3.5/site-packages/numpy
+numpy_version:  1.17.4
+
+NOTE: Python version was forced by use_python function
+```
+
+**On shinyapps.io, I see warning: using reticulate but python was not specified; will use python at /usr/bin/python Did you forget to set the RETICULATE_PYTHON environment variable in your .Rprofile before publishing?**
+
+Confirm that the .Rprofile file is included in your project's directory. This file sets the `RETICULATE_PYTHON` environment variable, which tells `reticulate` where to locate the Python virtual environment on the shinyapps.io servers.
