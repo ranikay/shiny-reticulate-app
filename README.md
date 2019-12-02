@@ -87,13 +87,13 @@ Install R and the required packages:
 - The R package [reticulate](https://rstudio.github.io/reticulate/). **Important notes**: the RStudio team has made some changes to `reticulate` recently, including [changes that enable Python 3 virtual environments on shinyapps.io](https://github.com/rstudio/reticulate/issues/399). Therefore, **you must currently use the development version of reticulate in order to deploy an app using Python 3 to shinyapps.io**. To install it, in the R console, run:
 
   ```
-  remotes::install_github("rstudio/reticulate", force = T, ref = '967a9a750e2f2e8ca61a9fe9fc3616bc63f97399')
+  > remotes::install_github("rstudio/reticulate", force = T, ref = '967a9a750e2f2e8ca61a9fe9fc3616bc63f97399')
   ```
 
 - The R package [shinycssloaders](). To install, in the R console, run:
 
   ```
-  devtools::install_github('andrewsali/shinycssloaders')
+  > devtools::install_github('andrewsali/shinycssloaders')
   ```
 
 <br>
@@ -180,6 +180,17 @@ If you visit the app url on shinyapps.io and see "Disconnected", log in to shiny
 
 Some common issues and how to solve them:
 
+**ERROR: The requested version of Python ('/usr/bin/python3') cannot be used, as another version of Python ('/usr/bin/python') has already been initialized.**
+
+When you run `library(reticulate)`, the `reticulate` package will try to initialize a version of Python, which may not be the version that you intend to use. To avoid this, in a fresh session, run set-up commands *without importing the reticulate library* with the :: syntax like this, for example:
+
+```
+> reticulate::virtualenv_create(envname = 'python35_env', 
+                                  python= '/usr/bin/python3')
+```
+
+Similarly, if you're setting the `RETICULATE_PYTHON` variable, you must do so *before* running `library(reticulate)`.
+
 **My app is deployed to shinyapps.io but shows that it's using Python 2.7**
 
 Confirm that the .Rprofile file is included in your project's directory and double-check the name of the virtual environment that the `RETICULATE_PYTHON` variable is pointing at. For example, in my .Rprofile file, we see:
@@ -214,9 +225,9 @@ numpy_version:  1.17.4
 NOTE: Python version was forced by use_python function
 ```
 
-**On shinyapps.io, I see warning: using reticulate but python was not specified; will use python at /usr/bin/python Did you forget to set the RETICULATE_PYTHON environment variable in your .Rprofile before publishing?**
+**On shinyapps.io, I see the warning: using reticulate but python was not specified; will use python at /usr/bin/python Did you forget to set the RETICULATE_PYTHON environment variable in your .Rprofile before publishing?**
 
-Confirm that the .Rprofile file is included in your project's directory. This file sets the `RETICULATE_PYTHON` environment variable, which tells `reticulate` where to locate the Python virtual environment on the shinyapps.io servers.
+Confirm that the .Rprofile file is included in your project's directory and was deployed along with server.R and ui.R to shinyapps.io. This file sets the `RETICULATE_PYTHON` environment variable, which tells `reticulate` where to locate the Python virtual environment on the shinyapps.io servers.
 
 --- 
 
