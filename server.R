@@ -6,14 +6,21 @@ plot_cols <- brewer.pal(11, 'Spectral')
 
 shinyServer(function(input, output) {
   
-  if (!Sys.info()[['sysname']] == 'Darwin'){
-    # When running on shinyapps.io, create a virtualenv 
-    reticulate::virtualenv_create(envname = 'python35_env', 
+  if (Sys.info()[['sysname']] != 'Darwin'){
+    
+    # When running on Linux, create a virtualenv 
+    reticulate::virtualenv_create(envname = '/tmp/python3_env', 
                                   python = '/usr/bin/python3')
-    reticulate::virtualenv_install('python35_env', 
-                                   packages = c('numpy'))  # <- Add other packages here, if needed
+    reticulate::virtualenv_install('/tmp/python3_env', 
+                                   packages = c('numpy'))
+    reticulate::use_virtualenv('/tmp/python3_env', required = T)
+  } else{
+    
+    # Running locally, use the already created virtualenv
+    reticulate::use_virtualenv('python35_env', required = T)
   }
-  reticulate::use_virtualenv('python35_env', required = T)
+  
+  # Import python functions to R
   reticulate::source_python('python_functions.py')
   
   # Generate the requested distribution
