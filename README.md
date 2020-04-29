@@ -4,13 +4,17 @@
 
 The `reticulate` package from RStudio allows you to incorporate Python functions and scripts into your R code. Inspired by the many questions online around writing and deploying Shiny apps that use the `reticulate` package, I created this app as an end-to-end example.
 
+Note that this app does something a little unusual: it sets a few relevant environment variables in the .Rprofile file. The purpose of this is to make this demonstration fully self-contained, allowing this app to be run in 3 different environments (locally, on shinyapps.io, and on RStudio Connect) without any modification. *However, please remember that the .Rprofile file should never be used for credentials, secrets, API keys, etc!*
+
 #### In this tutorial, you will learn:
 
 1. How to configure reticulate virtual environments for use locally and on shinyapps.io. (This example uses Python 3 but can be modified for Python 2, if desired.)
 
-2. How to deploy a Shiny + reticulate app to shinyapps.io
+2. How to deploy to shinyapps.io
 
 3. How to confirm that your app deployed on shinyapps.io is using the desired version of Python
+
+4. How to deploy to RStudio Connect
 
 ---
 
@@ -169,6 +173,16 @@ A successful deploy will produce a deployment log similar to this in the "Deploy
 <br>
 
 After deploying, visit the url shown in the deployment log in your browser to view the app running on shinyapps.io. Go to the **Architecture Info** tab to confirm that the desired version of Python is being used. For [this tutorial app deployed to shinyapps.io](https://elasticlabs.shinyapps.io/shiny-reticulate-app/), this is Python 3.5.
+
+#### Deploying to RStudio Connect
+
+Similar to to shinyapps.io deployment, deploying to RStudio Connect requires the `rsconnect` package and an RStudio Connect account. Once again, you'll begin by running the app locally. In RStudio, open the file server.R and click **Run App** to view your app.
+
+Click **Publish** in the upper right and select the RStudio Connect option. Log in using the URL for your RStudio Connect server and click **Publish** in the pop-up window to deploy.
+
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/as/q1sz52-ahuy0o-4mm0t0/Publish.png" width="600">
+</p>
 
 --- 
 
