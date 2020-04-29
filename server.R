@@ -1,19 +1,29 @@
+# Import R packages needed for the app here:
 library(shiny)
 library(DT)
 library(RColorBrewer)
 
-plot_cols <- brewer.pal(11, 'Spectral')
+# Define any Python packages needed for the app here:
+PYTHON_DEPENDENCIES = c('numpy')
 
+# Begin app server
 shinyServer(function(input, output) {
   
-  if (!Sys.info()[['sysname']] == 'Darwin'){
-    # When running on shinyapps.io, create a virtualenv 
-    reticulate::virtualenv_create(envname = 'python35_env', 
-                                  python = '/usr/bin/python3')
-    reticulate::virtualenv_install('python35_env', 
-                                   packages = c('numpy'))  # <- Add other packages here, if needed
-  }
-  reticulate::use_virtualenv('python35_env', required = T)
+  # ------------------ App virtualenv setup (Do not edit) ------------------- #
+  
+  virtualenv_dir = Sys.getenv('VIRTUALENV_NAME')
+  python_path = Sys.getenv('PYTHON_PATH')
+  
+  # Create virtual env and install dependencies
+  reticulate::virtualenv_create(envname = virtualenv_dir, python = python_path)
+  reticulate::virtualenv_install(virtualenv_dir, packages = PYTHON_DEPENDENCIES)
+  reticulate::use_virtualenv(virtualenv_dir, required = T)
+  
+  # ------------------ App server logic (Edit anything below) --------------- #
+  
+  plot_cols <- brewer.pal(11, 'Spectral')
+  
+  # Import python functions to R
   reticulate::source_python('python_functions.py')
   
   # Generate the requested distribution
@@ -39,12 +49,12 @@ shinyServer(function(input, output) {
                 col = plot_cols))
   })
   
-  # Testing that the Python functions have been imported
+  # Test that the Python functions have been imported
   output$message <- renderText({
     return(test_string_function(input$str))
   })
   
-  # Testing that numpy function can be used
+  # Test that numpy function can be used
   output$xy <- renderText({
     z = test_numpy_function(input$x, input$y)
     return(paste0('x + y = ', z))
@@ -64,7 +74,7 @@ shinyServer(function(input, output) {
     paste0('which python: ', Sys.which('python'))
   })
   
-  # Python version
+  # Display Python version
   output$python_version <- renderText({
     rr = reticulate::py_discover_config(use_environment = 'python35_env')
     paste0('Python version: ', rr$version)
@@ -73,6 +83,11 @@ shinyServer(function(input, output) {
   # Display RETICULATE_PYTHON
   output$ret_env_var <- renderText({
     paste0('RETICULATE_PYTHON: ', Sys.getenv('RETICULATE_PYTHON'))
+  })
+  
+  # Display virtualenv root
+  output$venv_root <- renderText({
+    paste0('virtualenv root: ', reticulate::virtualenv_root())
   })
   
 })
