@@ -4,7 +4,7 @@
 
 The `reticulate` package from RStudio allows you to incorporate Python functions and scripts into your R code. Inspired by the many questions online around writing and deploying Shiny apps that use the `reticulate` package, I created this app as an end-to-end example.
 
-Note that this app does something a little unusual: it sets a few relevant environment variables in the .Rprofile file. The purpose of the is to make this demonstration fully self-contained, allowing this app to be run in 3 different environments (locally, on shinyapps.io, and on RStudio Connect) without any modification. Section 4 below describes some recommendations for managing env variables in RStudio Connect. *However, please remember that an .Rprofile file should not be used for credentials, secrets, API keys, etc! And if you have creds in an .Rprofile or an .Renviron file, don't check them in to git as clear text.*
+Note that this app does something a little unusual: it sets a few relevant environment variables in the .Rprofile file. The purpose of the is to make this demonstration fully self-contained, allowing this app to be run in 3 different environments (locally, on shinyapps.io, and on RStudio Connect) without any modification. Section 4 below describes managing env variables in RStudio Connect. *However, please remember that an .Rprofile file should not be used for credentials, secrets, API keys, etc! And if you have creds in an .Rprofile or an .Renviron file, don't check them in to git as clear text.*
 
 #### In this tutorial, you will learn:
 
@@ -148,6 +148,14 @@ Click **Publish** in the upper right and select the RStudio Connect option:
 </p>
 
 Then, log in using the URL for your RStudio Connect server and click **Publish** in the pop-up window to deploy!
+
+Unlike shinyapps.io, RStudio Connect allows you to set environment variables through the user interface:
+
+<p align="center">
+<img src="https://cdn.brandfolder.io/TLCWDQBL/at/q9j6dp-1i9wa0-466e4p/env_vars_rstudio_connect.png" width="600">
+</p>
+
+This is a great option, especially for secrets, credentials, API keys, and other sensitive information.
 
 --- 
 
