@@ -51,7 +51,7 @@ The demo app example contains two tabs. The first tab demonstrates some R and Py
 To clone this project, in a terminal, run:
 
   ```
-  $ git clone https://github.com/ranikay/shiny-reticulate-app.git>
+  $ git clone https://github.com/ranikay/shiny-reticulate-app.git
   $ cd shiny-reticulate-app/
   ```
 
@@ -78,23 +78,23 @@ Install R and the required packages:
 
   To install the above packages, in the R console, run:
 
-  ```
-  > install.packages(shiny)
-  > install.packages(DT)
-  > install.packages(RColorBrewer)
-  ```
+```R
+install.packages("shiny")
+install.packages("DT")
+install.packages("RColorBrewer")
+```
   
 - The R package [reticulate](https://rstudio.github.io/reticulate/). **Important notes**: the RStudio team has made some changes to `reticulate` recently, including [changes that enable Python 3 virtual environments on shinyapps.io](https://github.com/rstudio/reticulate/issues/399). Therefore, **you must currently use the development version of reticulate in order to deploy an app using Python 3 to shinyapps.io**. To install it, in the R console, run:
 
-  ```
-  > remotes::install_github("rstudio/reticulate", force = T, ref = '967a9a750e2f2e8ca61a9fe9fc3616bc63f97399')
-  ```
+```R
+remotes::install_github("rstudio/reticulate", force = T, ref = '967a9a750e2f2e8ca61a9fe9fc3616bc63f97399')
+```
 
 - The R package [shinycssloaders](). To install, in the R console, run:
 
-  ```
-  > devtools::install_github('andrewsali/shinycssloaders')
-  ```
+```R
+devtools::install_github('andrewsali/shinycssloaders')
+```
 
 <br>
 
