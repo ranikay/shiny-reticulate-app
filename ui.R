@@ -1,22 +1,19 @@
+# Import R packages needed for the UI
 library(shiny)
 library(shinycssloaders)
 library(DT)
 
-# Define UI for Python 3 example app ----
+# Begin UI for the R + reticulate example app
 ui <- fluidPage(
   
-  # App title ----
-  titlePanel('Tutorial: Shiny + reticulate'),
+  titlePanel('Example app: Using R Shiny + reticulate'),
   
-  # Sidebar layout with input and output definitions ----
   sidebarLayout(
     
-    # Sidebar panel for inputs ----
+    # ---------------- Sidebar panel with changeable inputs ----------------- #
     sidebarPanel(
       
       h4('Inputs to pure R functions'),
-      
-      # Input: Select the random distribution type ----
       radioButtons('dist', 
                    'Distribution type:',
                    choices = c('Normal' = 'norm',
@@ -24,32 +21,26 @@ ui <- fluidPage(
                                'Log-normal' = 'lnorm', 
                                'Exponential' = 'exp')),
       br(),
-      
-      # Input: Slider for the number of observations to generate ----
       sliderInput('n',
                   'Number of observations:',
                   value = 5000,
                   min = 100,
                   max = 10000),
       hr(),
-      h4('Inputs to Python functions called by reticulate'),
       
-      # Input: Text that will be passed to a Python function ----
+      h4('Inputs to Python functions called by reticulate'),
       textInput('str',
                 'Text to display',
                 value = 'This text is being printed by a Python function!'),
-      
-      # Input: Numbers that will be passed to a Python function ----
       numericInput('x',
                    'x value',
                    value = 1),
       numericInput('y',
                    'y value',
                    value = 2)
-      
     ),
     
-    # Main panel for displaying outputs ----
+    # ---------------- Sidebar panel with changeable inputs ----------------- #
     mainPanel(
       
       # Output: Tabset w/ plot, summary, and table ----
@@ -73,7 +64,8 @@ ui <- fluidPage(
                            br(),
                            verbatimTextOutput('which_python'),
                            verbatimTextOutput('python_version'),
-                           verbatimTextOutput('ret_env_var')
+                           verbatimTextOutput('ret_env_var'),
+                           verbatimTextOutput('venv_root')
                   )
       )
     )
