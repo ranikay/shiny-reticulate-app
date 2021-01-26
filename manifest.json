@@ -13,7 +13,7 @@
     "version": "3.6.5",
     "package_manager": {
       "name": "pip",
-      "version": "21.0",
+      "version": "19.3.1",
       "package_file": "requirements.txt"
     }
   },
@@ -882,10 +882,7 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "43566825919f87186e0ba9e5e95afc48"
-    },
-    "global.R": {
-      "checksum": "c7a915855aba477ae4dde2eaaa44a8b3"
+      "checksum": "0ccf305757877b2c4cf1ad77d1d95ced"
     },
     "packrat/desc/base64enc": {
       "checksum": "bb8bc9fbfc52ae13ffc266396e7842ef"
