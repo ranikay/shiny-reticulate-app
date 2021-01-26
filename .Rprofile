@@ -7,7 +7,8 @@ venv_name = "example_env_name"
 
 # Setup handling different environments ----------------------------------------
 
-if (Sys.info()[['user']] == 'rstudio-connect'){
+# on RStudio Server or Connect
+if (Sys.info()[['user']] == 'rstudio-connect'|grepl("@projectronin.com$", Sys.info()[['user']])){
   
   # Running on remote server
   Sys.setenv(PYTHON_PATH = '/opt/python/3.6.5/bin/python')
@@ -18,7 +19,7 @@ if (Sys.info()[['user']] == 'rstudio-connect'){
   
   # Running locally
   options(shiny.port = 7450)
-  Sys.setenv(PYTHON_PATH = 'python3')
+  Sys.setenv(PYTHON_PATH = "python3")
   Sys.setenv(VIRTUALENV_NAME = venv_name) # exclude '/' => installs into ~/.virtualenvs/
   # RETICULATE_PYTHON is not required locally, RStudio infers it based on the ~/.virtualenvs path
 }
