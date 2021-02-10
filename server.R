@@ -4,7 +4,7 @@ library(DT)
 library(RColorBrewer)
 
 # Define any Python packages needed for the app here:
-PYTHON_DEPENDENCIES = c('numpy')
+PYTHON_DEPENDENCIES = c('numpy', 'pip')
 
 # Begin app server
 shinyServer(function(input, output) {
