@@ -5,7 +5,7 @@
 VIRTUALENV_NAME = 'example_env_name'
 
 
-# ------------------------- Settings (Do not edit) -------------------------- #
+# ------------------------- Settings (Edit local settings to match your system) -------------------------- #
 
 if (Sys.info()[['user']] == 'shiny'){
   
