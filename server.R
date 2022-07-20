@@ -4,7 +4,7 @@ library(DT)
 library(RColorBrewer)
 
 # Define any Python packages needed for the app here:
-PYTHON_DEPENDENCIES = c('pip', 'numpy')
+PYTHON_DEPENDENCIES = c('numpy')
 
 # Begin app server
 shinyServer(function(input, output) {
@@ -12,12 +12,20 @@ shinyServer(function(input, output) {
   # ------------------ App virtualenv setup (Do not edit) ------------------- #
   
   virtualenv_dir = Sys.getenv('VIRTUALENV_NAME')
-  python_path = Sys.getenv('PYTHON_PATH')
   
   # Create virtual env and install dependencies
-  reticulate::virtualenv_create(envname = virtualenv_dir, python = python_path)
-  reticulate::virtualenv_install(virtualenv_dir, packages = PYTHON_DEPENDENCIES, ignore_installed=TRUE)
-  reticulate::use_virtualenv(virtualenv_dir, required = T)
+  tryCatch(
+    reticulate::install_miniconda(),
+    error = function(e) message("Miniconda is already installed. Continuing ...")
+  )
+
+  tryCatch(
+    expr = reticulate::conda_python(envname = virtualenv_dir),
+    error = function(e) { reticulate::conda_create(envname = virtualenv_dir) }
+  )
+
+  reticulate::conda_install(virtualenv_dir, packages = PYTHON_DEPENDENCIES, ignore_installed=TRUE)
+  reticulate::use_miniconda(virtualenv_dir, required = T)
   
   # ------------------ App server logic (Edit anything below) --------------- #
   
@@ -71,12 +79,12 @@ shinyServer(function(input, output) {
   
   # Display system path to python
   output$which_python <- renderText({
-    paste0('which python: ', Sys.which('python'))
+    paste0('which python: ', reticulate::conda_python(envname = virtualenv_dir))
   })
   
   # Display Python version
   output$python_version <- renderText({
-    rr = reticulate::py_discover_config(use_environment = 'python35_env')
+    rr = reticulate::py_discover_config(use_environment = virtualenv_dir)
     paste0('Python version: ', rr$version)
   })
   
@@ -87,7 +95,7 @@ shinyServer(function(input, output) {
   
   # Display virtualenv root
   output$venv_root <- renderText({
-    paste0('virtualenv root: ', reticulate::virtualenv_root())
+    paste0('condaenv root: ', reticulate::miniconda_path(), "/", virtualenv_dir)
   })
   
 })
